@@ -4,6 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.2.32516.85
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "VisualDiscordBotCreator", "VisualDiscordBotCreator\VisualDiscordBotCreator.vcxproj", "{407897EE-2D20-4326-AE56-77F4E7F2158A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{69B81E25-F857-41C9-82D2-DD7475064442} = {69B81E25-F857-41C9-82D2-DD7475064442}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ApplicationGUI", "ApplicationGUI\ApplicationGUI.vcxproj", "{69B81E25-F857-41C9-82D2-DD7475064442}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +26,14 @@ Global
 		{407897EE-2D20-4326-AE56-77F4E7F2158A}.Release|x64.Build.0 = Release|x64
 		{407897EE-2D20-4326-AE56-77F4E7F2158A}.Release|x86.ActiveCfg = Release|Win32
 		{407897EE-2D20-4326-AE56-77F4E7F2158A}.Release|x86.Build.0 = Release|Win32
+		{69B81E25-F857-41C9-82D2-DD7475064442}.Debug|x64.ActiveCfg = Debug|x64
+		{69B81E25-F857-41C9-82D2-DD7475064442}.Debug|x64.Build.0 = Debug|x64
+		{69B81E25-F857-41C9-82D2-DD7475064442}.Debug|x86.ActiveCfg = Debug|Win32
+		{69B81E25-F857-41C9-82D2-DD7475064442}.Debug|x86.Build.0 = Debug|Win32
+		{69B81E25-F857-41C9-82D2-DD7475064442}.Release|x64.ActiveCfg = Release|x64
+		{69B81E25-F857-41C9-82D2-DD7475064442}.Release|x64.Build.0 = Release|x64
+		{69B81E25-F857-41C9-82D2-DD7475064442}.Release|x86.ActiveCfg = Release|Win32
+		{69B81E25-F857-41C9-82D2-DD7475064442}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

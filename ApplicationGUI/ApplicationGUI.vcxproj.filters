@@ -18,7 +18,33 @@
     <None Include="VisualDiscordBotCreator.licenseheader" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Application.cpp">
+    <ClInclude Include="src\ApplicationGUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AppGUI\Core.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AppGUI\Controls\Control.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AppGUI\Application.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AppGUI\pch.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\AppGUI\EntryPoint.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\AppGUI\Controls\Control.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AppGUI\pch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AppGUI\Application.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
