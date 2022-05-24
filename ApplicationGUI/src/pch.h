@@ -4,21 +4,14 @@
  */
 #pragma once
 
-#include "pch.h"
+// Standard Library
+#include <iostream>
+#include <vector>
+#include <functional>
+// Standard C
+#include <math.h>
 
-namespace AppGUI {
-
-	template<class T>
-	class BaseControl
-	{
-
-	protected:
-		
-		void virtual OnRedraw() = 0;
-		bool virtual Create(wchar_t text) = 0;
-		
-
-		
-	};
-
-}
+// Windows
+#include <Windows.h>
+#include <d2d1.h>
+#include <dwmapi.h>

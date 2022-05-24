@@ -2,23 +2,4 @@
  * You should have received a copy of the GNU AGPL v3.0 license with
  * this file. If not, please write to: pliexe, or visit : https://github.com/Pliexe/VisualDiscordBotCreator/blob/master/LICENSE
  */
-#pragma once
-
 #include "pch.h"
-
-namespace AppGUI {
-
-	template<class T>
-	class BaseControl
-	{
-
-	protected:
-		
-		void virtual OnRedraw() = 0;
-		bool virtual Create(wchar_t text) = 0;
-		
-
-		
-	};
-
-}
