@@ -8,10 +8,14 @@
 #include <iostream>
 #include <vector>
 #include <functional>
+#include <string>
 // Standard C
 #include <math.h>
 
 // Windows
-#include <Windows.h>
 #include <d2d1.h>
+#include <dwrite.h>
+
+#include <Windows.h>
 #include <dwmapi.h>
+#include <VersionHelpers.h>

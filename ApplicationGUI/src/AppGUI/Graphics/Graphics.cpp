@@ -9,11 +9,13 @@ namespace AppGUI {
 	{
 		factory = NULL;
 		renderTarget = NULL;
+		writeFactory = NULL;
 	}
 	Graphics::~Graphics()
 	{
 		if (factory) factory->Release();
 		if (renderTarget) renderTarget->Release();
+		if(writeFactory) writeFactory->Release();
 	}
 	bool Graphics::Init(HWND hWnd)
 	{
@@ -27,7 +29,17 @@ namespace AppGUI {
 			D2D1::HwndRenderTargetProperties(hWnd, D2D1::SizeU(rect.right, rect.bottom)),
 			&renderTarget
 		) != S_OK) return false;
+
+		if (DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED, __uuidof(writeFactory), reinterpret_cast<IUnknown**>(&writeFactory)) != S_OK) return false;
 		
 		return true;
+	}
+
+	void Graphics::Resize(int width, int height)
+	{
+		if (renderTarget != NULL)
+		{
+			renderTarget->Resize(D2D1::SizeU(width, height));
+		}
 	}
 }

@@ -27,7 +27,7 @@ namespace AppGUI {
 		HWND m_hWnd;
 
 		bool virtual Create(int x, int y, int width, int height) = 0;
-		bool virtual Show(int nCmdShow) = 0;
+		bool virtual Show() = 0;
 
 		PCWSTR ClassName = L"2D DX Window";
 	};

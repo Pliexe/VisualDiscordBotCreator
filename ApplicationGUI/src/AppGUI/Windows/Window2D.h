@@ -20,18 +20,29 @@ namespace AppGUI {
 
 		int m_width;
 		int m_height;
+
+		int m_x;
+
+		bool maximized = false;
+
+		ID2D1SolidColorBrush* titleBarBrush;
+		//ID2D1SolidColorBrush* titleBarTextBrush;
+		ID2D1SolidColorBrush* titleBarIconBrush;
+
+		IDWriteTextFormat* textFormat;
+
+		void RenderTitleBar();
+
 	public:
 		Window2D(HWND _hWndParent, bool _isMain = false);
 		~Window2D();
 		
- 		bool Create(int x, int y, int width, int height) { return Create(x, y, width, height, NULL, NULL); }
-		bool Create(int x, int y, int width, int height, DWORD dwStyle) { return Create(x, y, width, height, dwStyle, NULL); }
-		bool Create(int x, int y, int width, int height, DWORD dwStyle, DWORD dwExStyle);
+		bool Create(int x, int y, int width, int height);
 
 		bool Init();
 
-		bool Show(int nCmdShow) {
-			return ShowWindow(m_hWnd, nCmdShow);
+		bool Show() {
+			return ShowWindow(m_hWnd, SW_SHOW);
 		}
 
 		LRESULT HandleProc(UINT uMsg, WPARAM wParam, LPARAM lParam);

@@ -12,18 +12,22 @@ namespace AppGUI {
 	private:
 		ID2D1Factory* factory;
 		ID2D1HwndRenderTarget* renderTarget;
+		IDWriteFactory* writeFactory;
 
 		ID2D1SolidColorBrush* brush;
 	public:
 		Graphics();
 		~Graphics();
-
-		ID2D1HwndRenderTarget* GetRenderTarget() const { return renderTarget; }
-
+		
+		inline ID2D1HwndRenderTarget* GetRenderTarget() const { return renderTarget; }
+		inline IDWriteFactory* GetWriteFactory() const { return writeFactory; }
+		
 		bool Init(HWND hWnd);
 
 		void ClearScreen(int r, int g, int b) { renderTarget->Clear(D2D1::ColorF(r, g, b)); }
 		void BeginDraw() { renderTarget->BeginDraw(); }
 		void EndDraw() { renderTarget->EndDraw(); }
+
+		void Resize(int width, int height);
 	};
 }

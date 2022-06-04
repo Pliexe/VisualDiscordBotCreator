@@ -36,7 +36,8 @@ namespace AppGUI {
 
 		windowList.push_back(mainWindow);
 
-		if (!mainWindow->Create(0, 0, 800, 600, WS_OVERLAPPEDWINDOW)) {
+		//WS_OVERLAPPEDWINDOW
+		if (!mainWindow->Create(0, 0, 800, 600)) {
 			ShowMessage(L"Error", L"Could not create window", MB_ICONERROR);
 			return;
 		}
@@ -47,7 +48,7 @@ namespace AppGUI {
 			return;
 		}
 
-		mainWindow->Show(SW_SHOWMAXIMIZED);
+		mainWindow->Show();
 
 
 		for (int i = 0; i < 3; i++)
@@ -57,15 +58,10 @@ namespace AppGUI {
 
 			
 			windowList.push_back(sideWindow);
-
-			if (!sideWindow->Create(0, 0, 800, 600, WS_POPUP | WS_CLIPSIBLINGS, NULL)) {
+			if (!sideWindow->Create(0, 0, 800, 600)) {
 				ShowMessage(L"Error", L"Could not create window", MB_ICONERROR);
 				return;
 			}
-
-			// Windows 11 Styling
-			DWM_WINDOW_CORNER_PREFERENCE prefrence = DWMWCP_ROUND;
-			DwmSetWindowAttribute(sideWindow->m_hWnd, DWMWA_WINDOW_CORNER_PREFERENCE, &prefrence, sizeof(prefrence));
 
 			/*SetWindowLong(sideWindow->m_hWnd, GWL_STYLE, 0);
 			SetWindowPos(sideWindow->m_hWnd, 0, 150, 100, 250, 250, SWP_FRAMECHANGED);*/
@@ -76,7 +72,7 @@ namespace AppGUI {
 				return;
 			}
 
-			sideWindow->Show(SW_SHOW);
+			sideWindow->Show();
 		}
 
 		MSG message;
@@ -92,7 +88,7 @@ namespace AppGUI {
 					(*it)->Update();
 					(*it)->Render();
 				}
-				Sleep(10);
+				Sleep(5);
 			}
 		}
 	}
