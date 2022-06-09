@@ -13,11 +13,13 @@ namespace AppGUI {
 		ID2D1Factory* factory;
 		ID2D1HwndRenderTarget* renderTarget;
 		IDWriteFactory* writeFactory;
-
-		ID2D1SolidColorBrush* brush;
 	public:
 		Graphics();
 		~Graphics();
+
+		void CreateSolidColorBrush(D2D_COLOR_F color, ID2D1SolidColorBrush **brush) {
+			renderTarget->CreateSolidColorBrush(color, brush);
+		}
 		
 		inline ID2D1HwndRenderTarget* GetRenderTarget() const { return renderTarget; }
 		inline IDWriteFactory* GetWriteFactory() const { return writeFactory; }

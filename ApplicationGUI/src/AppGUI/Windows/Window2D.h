@@ -4,10 +4,12 @@
  */
 #pragma once
 
+#include "pch.h"
 #include "AppGUI/Windows/BaseWindow.h"
 #include "AppGUI/Core.h"
 #include "AppGUI/Graphics/Graphics.h"
 #include "AppGUI/Application.h"
+#include "AppGUI/Windows/DockPanel.h"
 
 namespace AppGUI {
 
@@ -24,6 +26,8 @@ namespace AppGUI {
 		int m_x;
 
 		bool maximized = false;
+
+		std::vector<DockPanel*> dockedPanels;
 
 		ID2D1SolidColorBrush* titleBarBrush;
 		//ID2D1SolidColorBrush* titleBarTextBrush;

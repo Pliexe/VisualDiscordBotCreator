@@ -97,6 +97,8 @@ namespace AppGUI {
 		textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 		textFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
 
+		dockedPanels.push_back(new DockPanel(*graphics));
+
 		return true;
 	}
 
@@ -116,10 +118,10 @@ namespace AppGUI {
 
 		auto renderTarget = graphics->GetRenderTarget();
 
-		/*ID2D1SolidColorBrush* brush;
-		graphics->GetRenderTarget()->CreateSolidColorBrush(D2D1::ColorF(25.0f, 25.0f, 25.0f, 1.0f), &brush);
-
-		graphics->GetRenderTarget()->DrawEllipse(D2D1::Ellipse(D2D1::Point2F(rand() % 400, 50), 50, 50), brush, 3.0f);*/
+		for (std::vector<DockPanel*>::iterator it = dockedPanels.begin(), end = dockedPanels.end(); it != end; ++it)
+		{
+			(*it)->OnDraw(*graphics);
+		}
 
 		// Render Title bar
 		RenderTitleBar();
@@ -138,7 +140,7 @@ namespace AppGUI {
 		renderTarget->DrawLine(D2D1::Point2F(m_width - 10, 20), D2D1::Point2F(m_width - 25, 5), titleBarIconBrush, 1.5f);
 		// O
 		
-		if (maximized) {
+		if (IsMaximized(m_hWnd)) {
 			renderTarget->DrawRectangle(D2D1::RectF(m_width - 52, 5, m_width - 40, 17), titleBarIconBrush, 1.5f);
 			renderTarget->FillRectangle(D2D1::RectF(m_width - 55, 8, m_width - 43, 20), titleBarBrush);
 			renderTarget->DrawRectangle(D2D1::RectF(m_width - 55, 8, m_width - 43, 20), titleBarIconBrush, 1.5f);
@@ -206,7 +208,10 @@ namespace AppGUI {
 				PostMessage(m_hWnd, WM_SYSCOMMAND, SC_MINIMIZE, 0);
 				return 0;
 			case HTMAXBUTTON:
-				PostMessage(m_hWnd, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
+				if (IsMaximized(m_hWnd))
+					PostMessage(m_hWnd, WM_SYSCOMMAND, SC_RESTORE, 0);
+				else
+					PostMessage(m_hWnd, WM_SYSCOMMAND, SC_MAXIMIZE, 0);
 				return 0;
 			default:
 				return DefWindowProc(m_hWnd, uMsg, wParam, lParam);
@@ -243,15 +248,15 @@ namespace AppGUI {
 					relative.y -= 8;
 				}
 
-				std::cout << " | Modified Relative > X: " << relative.x << ", Y: " << relative.y << std::endl;
+				std::cout << " | Modified Relative > X: " << relative.x << ", Y: " << relative.y << " | x: " << m_width - relative.x << std::endl;
 
 				if (relative.y <= 25) {
 					//MessageBox(m_hWnd, std::wstring(L"Yes or no: " + std::wstring(((relative.x <= m_width - 25 && relative.x >= m_width - 10) ? L"true" : L"false")) + L", Cords: " + std::to_wstring(m_width - relative.x) + L" " + std::to_wstring(relative.y) + L", BRUH: " + std::to_wstring(relative.x) + L" <= " + std::to_wstring(m_width - 25) + L" && " + std::to_wstring(relative.x) + L" >= " + std::to_wstring(m_width - 10)).c_str(), L"Cords", MB_OK);
 					if (m_width - relative.x <= 25 && m_width - relative.x >= 10 && relative.y <= 20 && relative.y >= 5)
 						return HTCLOSE;
-					else if (m_width - relative.x <= 52 && m_width - relative.x >= 40 && relative.y <= 20 && relative.y >= 5)
+					else if (m_width - relative.x <= 55 && m_width - relative.x >= 40 && relative.y <= 20 && relative.y >= 5)
 						return HTMAXBUTTON;
-					else if (m_width - relative.x <= 70 && m_width - relative.x >= 55 && relative.y <= 20 && relative.y >= 5)
+					else if (m_width - relative.x <= 85 && m_width - relative.x >= 70 && relative.y <= 20 && relative.y >= 5)
 						return HTMINBUTTON;
 					else if (relative.y <= border_width)
 					{

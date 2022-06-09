@@ -9,6 +9,7 @@
 #include <vector>
 #include <functional>
 #include <string>
+#include <cmath>
 // Standard C
 #include <math.h>
 
