@@ -118,10 +118,18 @@ namespace AppGUI {
 
 		auto renderTarget = graphics->GetRenderTarget();
 
+		ID2D1SolidColorBrush* tempBrush;
+		graphics->CreateSolidColorBrush(D2D1::ColorF(1.0f, 0.5f, 0.5f, 1.0f), &tempBrush);
+
 		for (std::vector<DockPanel*>::iterator it = dockedPanels.begin(), end = dockedPanels.end(); it != end; ++it)
 		{
-			(*it)->OnDraw(*graphics);
+			std::cout << "Rendering " << (isMain ? "main" : "side") << "Window" << std::endl;
+			(*it)->OnDraw(*graphics, tempBrush);
+			
+			renderTarget->DrawRoundedRectangle(D2D1::RoundedRect(D2D1::RectF(150.0f, 150.0f), 5.0f, 5.0f), tempBrush, 2.0f);
 		}
+
+		tempBrush->Release();
 
 		// Render Title bar
 		RenderTitleBar();

@@ -44,12 +44,14 @@ namespace AppGUI {
 			else return false;
 		}
 		
-		void OnDraw(Graphics& graphics) {
+		void inline OnDraw(Graphics& graphics, ID2D1SolidColorBrush* tmpBrush) {
 			static auto renderTarget = graphics.GetRenderTarget();
 
 			static auto test = transform.positionRectF();
 
 			renderTarget->DrawRoundedRectangle(D2D1::RoundedRect(transform.positionRectF(), 5.0f, 5.0f), panelBrush, 2.0f);
+
+			renderTarget->DrawRoundedRectangle(D2D1::RoundedRect(D2D1::RectF(250.0f, 250.0f), 15.0f, 15.0f), tmpBrush, 2.0f);
 		}
 	};
 }
