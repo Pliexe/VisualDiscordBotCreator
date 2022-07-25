@@ -97,7 +97,11 @@ namespace AppGUI {
 		textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 		textFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
 
-		dockedPanels.push_back(new DockPanel(*graphics));
+		RECT rcRect;
+
+		GetClientRect(m_hWnd, &rcRect);
+
+		dockedPanels.push_back(new DockPanel(*graphics, 5, 40, rcRect.right - 10, rcRect.bottom - 50));
 
 		return true;
 	}
@@ -120,7 +124,7 @@ namespace AppGUI {
 
 		for (std::vector<DockPanel*>::iterator it = dockedPanels.begin(), end = dockedPanels.end(); it != end; ++it)
 		{
-			(*it)->OnDraw(*graphics);
+			(*it)->OnDraw(renderTarget);
 		}
 
 		// Render Title bar

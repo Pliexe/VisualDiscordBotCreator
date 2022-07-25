@@ -23,10 +23,10 @@ namespace AppGUI {
 
 	public:
 
-		DockPanel(Graphics& graphics) {
+		DockPanel(Graphics& graphics, int x, int y, int w, int h) {
 			graphics.CreateSolidColorBrush(D2D1::ColorF(1.0f, 0.5f, 0.0f, 1.0f), &panelBrush);
-			transform.setPosition(40, 40);
-			transform.setSize(50, 50);
+			transform.setPosition(x, y);
+			transform.setSize(w, h);
 		}
 
 		~DockPanel() {
@@ -44,8 +44,7 @@ namespace AppGUI {
 			else return false;
 		}
 		
-		void OnDraw(Graphics& graphics) {
-			static auto renderTarget = graphics.GetRenderTarget();
+		void OnDraw(ID2D1HwndRenderTarget *renderTarget) {
 
 			static auto test = transform.positionRectF();
 
