@@ -23,10 +23,10 @@ namespace AppGUI {
 
 	public:
 
-		DockPanel(Graphics& graphics) {
+		DockPanel(Graphics& graphics, int x, int y, int w, int h) {
 			graphics.CreateSolidColorBrush(D2D1::ColorF(1.0f, 0.5f, 0.0f, 1.0f), &panelBrush);
-			transform.setPosition(40, 40);
-			transform.setSize(50, 50);
+			transform.setPosition(x, y);
+			transform.setSize(w, h);
 		}
 
 		~DockPanel() {
@@ -44,14 +44,11 @@ namespace AppGUI {
 			else return false;
 		}
 		
-		void inline OnDraw(Graphics& graphics, ID2D1SolidColorBrush* tmpBrush) {
-			static auto renderTarget = graphics.GetRenderTarget();
+		void OnDraw(ID2D1HwndRenderTarget *renderTarget) {
 
 			static auto test = transform.positionRectF();
 
 			renderTarget->DrawRoundedRectangle(D2D1::RoundedRect(transform.positionRectF(), 5.0f, 5.0f), panelBrush, 2.0f);
-
-			renderTarget->DrawRoundedRectangle(D2D1::RoundedRect(D2D1::RectF(250.0f, 250.0f), 15.0f, 15.0f), tmpBrush, 2.0f);
 		}
 	};
 }

@@ -97,7 +97,11 @@ namespace AppGUI {
 		textFormat->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_CENTER);
 		textFormat->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
 
-		dockedPanels.push_back(new DockPanel(*graphics));
+		RECT rcRect;
+
+		GetClientRect(m_hWnd, &rcRect);
+
+		dockedPanels.push_back(new DockPanel(*graphics, 5, 40, rcRect.right - 10, rcRect.bottom - 50));
 
 		return true;
 	}
@@ -118,18 +122,10 @@ namespace AppGUI {
 
 		auto renderTarget = graphics->GetRenderTarget();
 
-		ID2D1SolidColorBrush* tempBrush;
-		graphics->CreateSolidColorBrush(D2D1::ColorF(1.0f, 0.5f, 0.5f, 1.0f), &tempBrush);
-
 		for (std::vector<DockPanel*>::iterator it = dockedPanels.begin(), end = dockedPanels.end(); it != end; ++it)
 		{
-			std::cout << "Rendering " << (isMain ? "main" : "side") << "Window" << std::endl;
-			(*it)->OnDraw(*graphics, tempBrush);
-			
-			renderTarget->DrawRoundedRectangle(D2D1::RoundedRect(D2D1::RectF(150.0f, 150.0f), 5.0f, 5.0f), tempBrush, 2.0f);
+			(*it)->OnDraw(renderTarget);
 		}
-
-		tempBrush->Release();
 
 		// Render Title bar
 		RenderTitleBar();
